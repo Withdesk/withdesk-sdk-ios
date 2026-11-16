@@ -1,0 +1,108 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 6.4.2 effective-5.10 (swiftlang-6.4.2.1.9 clang-2100.4.1.1)
+// swift-module-flags: -target arm64-apple-ios16.0-simulator -enable-objc-interop -enable-library-evolution -language-mode 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name WithdeskSDK
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.4.2
+import CoreGraphics
+import CryptoKit
+import Darwin
+import Foundation
+import OSLog
+import QuartzCore
+import Swift
+import UIKit
+import VideoToolbox
+import WebKit
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers final public class Withdesk {
+  public static let shared: WithdeskSDK::Withdesk
+  public static var delegate: (any WithdeskSDK::WithdeskDelegate)? {
+    get
+    set
+  }
+  public static var hasSession: Swift::Bool {
+    get
+  }
+  final public var hasSessionFromCore: Swift::Bool {
+    get
+  }
+  public static func initialize(licenseKey: Swift::String) async -> Swift::Result<Swift::Void, any Swift::Error>
+  public static func initialize(licenseKey: Swift::String, completion: @escaping (Swift::Result<Swift::Void, any Swift::Error>) -> Swift::Void)
+  public static func addMaskedView(_ view: UIKit::UIView)
+  public static func addMaskedCssSelectors(_ selectors: [Swift::String])
+  public static func startSession(code: Swift::String) async -> Swift::Result<Swift::Void, any Swift::Error>
+  public static func startSession(code: Swift::String, completion: @escaping (Swift::Result<Swift::Void, any Swift::Error>) -> Swift::Void)
+  public static func stopSession() async -> Swift::Result<Swift::Void, any Swift::Error>
+  public static func stopSession(completion: @escaping (Swift::Result<Swift::Void, any Swift::Error>) -> Swift::Void)
+  public static func configuerLogging(with newConfig: WithdeskSDK::WithdeskLogConfig)
+  @objc deinit
+}
+public protocol WithdeskDelegate : AnyObject {
+  func withdeskDidEndSession(_ withdesk: WithdeskSDK::Withdesk)
+}
+extension WithdeskSDK::WithdeskDelegate {
+  public func withdeskDidEndSession(_ withdesk: WithdeskSDK::Withdesk)
+}
+public enum WithdeskInitializationError : Swift::Error {
+  case invalidLicenseKey
+  case networkUnavailable
+  case unauthorizedApplication
+  case unknown
+  public static func == (a: WithdeskSDK::WithdeskInitializationError, b: WithdeskSDK::WithdeskInitializationError) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+extension WithdeskSDK::WithdeskInitializationError : Foundation::LocalizedError {
+  public var errorDescription: Swift::String? {
+    get
+  }
+}
+public enum WithdeskSessionError : Swift::Error {
+  case invalidSessionCode
+  case networkUnavailable
+  case unknown
+  public static func == (a: WithdeskSDK::WithdeskSessionError, b: WithdeskSDK::WithdeskSessionError) -> Swift::Bool
+  public func hash(into hasher: inout Swift::Hasher)
+  public var hashValue: Swift::Int {
+    get
+  }
+}
+extension WithdeskSDK::WithdeskSessionError : Foundation::LocalizedError {
+  public var errorDescription: Swift::String? {
+    get
+  }
+}
+public protocol WithdeskLogHandler {
+  func log(message: Swift::String)
+}
+public struct WithdeskLogConfig {
+  public enum Console {
+    case none
+    case `default`
+    case verbose
+    public static func == (a: WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Console, b: WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Console) -> Swift::Bool
+    public func hash(into hasher: inout Swift::Hasher)
+    public var hashValue: Swift::Int {
+      get
+    }
+  }
+  public struct Remote {
+    public var handlers: [any WithdeskSDK::WithdeskLogHandler]
+    public init(handlers: [any WithdeskSDK::WithdeskLogHandler] = [])
+  }
+  public var console: WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Console
+  public var remote: WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Remote?
+  public static var `default`: WithdeskSDK::WithdeskLogConfig {
+    get
+  }
+  public init(console: WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Console, remote: WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Remote? = nil)
+}
+extension WithdeskSDK::WithdeskInitializationError : Swift::Equatable {}
+extension WithdeskSDK::WithdeskInitializationError : Swift::Hashable {}
+extension WithdeskSDK::WithdeskSessionError : Swift::Equatable {}
+extension WithdeskSDK::WithdeskSessionError : Swift::Hashable {}
+extension WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Console : Swift::Equatable {}
+extension WithdeskSDK::WithdeskLogConfig.WithdeskSDK::Console : Swift::Hashable {}
